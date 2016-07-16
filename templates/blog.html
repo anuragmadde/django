@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block base_title%} {{ block.super}} | Blog {% endblock %}
+
+{% block content %}
+	<div class="col-sm-6">
+	<h2>{{ title }}</h2>
+	<form class="row" role="search">
+		<div class='col-sm-6'>
+	    	<div class="input-group add-on">
+	      		<input class="form-control" placeholder="Search Post" name="query" type="text" value='{{ request.GET.query }}'>
+	      		<span class="input-group-btn">
+	        	<button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+	      		</span>
+	    	</div>
+    	</div>
+  	</form>
+		
+  		
+		{% for obj in query_Set %}
+		<!-- <a href = {% url 'blog:detail' slug=obj.slug %}>{{ obj.title }}</a><br/> -->
+			
+		<div class="row">
+		  <div class="col-sm-12">
+		    <div class="thumbnail">
+		      {% if obj.image %}
+				<img src='{{ obj.image.url }}' class='img-responsive'/>
+			  {% endif %}
+		      <div class="caption post-detail-item">
+		        <h3><a href = '{{ obj.get_absolute_url }}'>{{ obj.title }}</a> <small>{{ obj.timestamp | timesince}} ago</small></h3>
+		        <p>Author : {{ obj.user.get_full_name }}</p>
+		        <p class='content-markdown'>{{ obj.content|safe | truncatechars_html:10}}</p>
+		        <p><a href="{{ obj.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+		      </div>
+		    </div>
+		  </div>
+		</hr>
+		  {% cycle "" "</div><div class='row'>" %}
+		</div>
+		{% endfor %}
+		
+	
+
+	<div class="pagination">
+    <span class="step-links">
+        {% if query_Set.has_previous %}
+            <a href="?page={{ query_Set.previous_page_number }}{% if request.GET.query%}&query={{ request.GET.query }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ query_Set.number }} of {{ query_Set.paginator.num_pages }}.
+        </span>
+
+        {% if query_Set.has_next %}
+            <a href="?page={{ query_Set.next_page_number }}{% if request.GET.query%}&query={{ request.GET.query }}{% endif %}">next</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

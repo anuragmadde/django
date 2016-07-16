@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block base_title%} {{ block.super}} | Contact {% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-4 pull-right"
+<form  method="POST">{% csrf_token %}
+
+{{form|crispy}}
+<input class="btn btn-primary" type="submit" value="Send"></input>
+
+</form>
+</div>
+</div>
+{% endblock %}

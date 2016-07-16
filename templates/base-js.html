@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	$(".content-markdown").each(function(){
+    		var content = $(this).text()
+    		var markedContent= marked(content)
+    		$(this).html(markedContent)
+
+    	})
+        $(".post-detail-item img").each(function(){
+            $(this).addClass('img-responsive')
+
+        })
+
+        var titleInput = $('#id_title')
+        var titleContent = $('#id_content')
+
+        function set_title(value){
+            $('#preview-title').text(value)
+        }
+
+        function set_content(value){
+            $('#preview-content').html(marked(value))
+        }
+
+        set_title(titleInput.val())
+        set_content(titleContent.val())
+
+        titleInput.keyup(function(){
+            set_title($(this).val())    
+        })
+
+        titleContent.keyup(function(){
+            set_content($(this).val())    
+        })
+
+
+
+        
+
+    })
+
+    </script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
