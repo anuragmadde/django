@@ -7,6 +7,7 @@ urlpatterns = [
     # Examples:
      url(r'^$', 'newsletter.views.home',name='django'),
      url(r'^newsletter/',include('newsletter.urls', namespace='newsletter')),
+     url(r'^comments/',include('comments.urls', namespace='comment')),
      
      url(r'^blog/',include('blog.urls', namespace='blog')),
      # url(r'^blog/', include('blog.urls')),

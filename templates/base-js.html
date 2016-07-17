@@ -42,10 +42,10 @@
             set_content($(this).val())    
         })
 
-
-
-        
-
+        $('.reply-button').click(function(event){
+            event.preventDefault();
+            $(this).parent().next('.comment-reply').fadeToggle();
+        })
     })
 
     </script>

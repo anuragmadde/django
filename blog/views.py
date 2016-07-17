@@ -9,6 +9,7 @@ from .models import Blog
 from comments.models import Comment
 from .forms import BlogForm
 from comments.forms import CommentForm
+from .utils import get_read_time
 
 # Create your views here.
 
@@ -45,8 +46,8 @@ def blog_home (request):
 
 
 def blog_create (request):
-	if not request.user.is_staff or not request.user.is_superuser:
-		raise Http404
+	# if not request.user.is_staff or not request.user.is_superuser:
+	# 	raise Http404
 	if not request.user.is_authenticated():
 		raise Http404
 	form = BlogForm(request.POST or None, request.FILES or None)
@@ -71,22 +72,36 @@ def blog_detail (request, slug=None):
 		"content_type" :instance.get_contentType,
 		"object_id" : instance.id
 	}
-
+	
+	print (get_read_time(instance.get_markdown()))
 	form=CommentForm(request.POST or None,initial=initial_data)
 	if form.is_valid():
 		contentType=form.cleaned_data.get("content_type")
 		c_Type=ContentType.objects.get(model=contentType)
 		obj_id=form.cleaned_data.get("object_id")
-		contentData=form.cleaned_data.get("comment")
-		created=Comment.objects.get_or_create(
+		contentData=form.cleaned_data.get("content")
+		parent_obj = None
+		try:
+			parent_id=request.POST.get("parent_id")
+		except:
+			parent_id=None
+		
+		if parent_id:
+			parent_qs=Comment.objects.filter(id=parent_id)
+			if parent_qs.exists():
+				parent_obj=parent_qs.first()
+
+		if not request.user.is_authenticated():
+			raise Http404
+		new_comment,created=Comment.objects.get_or_create(
 				user=request.user,
 				content_type=c_Type,
 				object_id=obj_id,
-				comment = contentData,
+				content = contentData,
+				parent=parent_obj
 			)
-
-		if created:
-			print ("Success")
+		
+		return HttpResponseRedirect(new_comment.content_object.get_absolute_url())
 
 
 	comments=instance.get_comment
