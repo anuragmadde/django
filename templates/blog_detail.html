@@ -32,6 +32,7 @@
 	<img src='{{ instance.image.url }}' class='img-responsive'/>
 	{% endif %}
 	<h2>{{ title }} <small>{{ instance.timestamp| timesince}}</small></h2>	
+	<p>Read Time : {{ instance.read_time|time:'i'}} minutes </p>
 	<p>Author : {{ instance.user }}</p>
 	
 	<!-- {% if messages %}
@@ -78,7 +79,8 @@
   				<footer>by {{ loop.user}} | {{loop.timestamp|timesince}} ago |  
   					{% if loop.children.count > 0 %} {{ loop.children.count }} Comment{% if loop.children.count > 1%}s{% endif %} |{% endif%}
   					<a href="#" class='reply-button'>Reply</a> |
-  					<a href="{{ loop.get_comments_absolute_url }}" >Thread</a>
+  					<a href="{{ loop.get_comments_absolute_url }}" >Thread</a> | 
+  					
 
   				</footer>
 

@@ -34,6 +34,10 @@ class Comment(models.Model):
  	def get_comments_absolute_url(self):
  		return reverse("comment:detail", kwargs={"id": self.id})
 
+ 	def get_comments_delete_url(self):
+ 		return reverse("comment:delete", kwargs={"id": self.id})
+
+
  	class Meta:
  		ordering = ["-timestamp"]
  	objects=models.Manager()

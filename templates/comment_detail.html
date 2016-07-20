@@ -2,7 +2,7 @@
 {% load urlify %}
 {% load crispy_forms_tags %}
 
-{% block base_title%} {{ block.super}} | Detail {% endblock %}
+{% block base_title%} {{ block.super}} | Comment | Detail {% endblock %}
 
 <style>
 {% block style %}
@@ -34,6 +34,7 @@
 	<p class='lead'>{{ loop.content }}</p>
 	<footer>by {{ loop.user}} | {{loop.timestamp|timesince}} ago |  
 		{% if loop.children.count > 0 %} {{ loop.children.count }} Comment{% if loop.children.count > 1%}s{% endif %} |{% endif%}
+		{% if loop.user == request.user %} <a href="{{ loop.get_comments_delete_url }}">Delete</a>{% endif %}
 		
 
 	</footer>
@@ -42,9 +43,12 @@
 		{% for children_id in loop.children %}
 		<blockquote>
 			<p>{{ children_id.content }}</p>
-			<footer>by {{ children_id.user}} | {{children_id.timestamp|timesince}} ago</footer>
+			<footer>by {{ children_id.user}} | {{children_id.timestamp|timesince}} ago {% if loop.user == request.user %} | <a href="{{ loop.get_comments_delete_url }}">Delete</a> {% endif %}
+			</footer>
+
 		</blockquote>
 		{% endfor %}
+
 
 		<form method="POST">{% csrf_token %}
 			{{ my_form |crispy }}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load urlify %}
+{% load crispy_forms_tags %}
+
+{% block base_title%} {{ block.super}} | Login {% endblock %}
+
+
+
+<!-- {% block head_content %} 
+
+{{ my_form.media }}
+
+{% endblock head_content %}
+ -->
+{% block content %}
+
+<div class='col-sm-6 col-sm-offset-0'>
+	
+
+		
+	<p class='lead'>{{ title }}</p>
+	
+
+		<form method="POST">{% csrf_token %}
+			{{ form |crispy }}
+			<input type="submit" value="Login" class="btn btn-default"></input>
+		</form>
+	</div>
+
+	
+</div>
+
+{% endblock %}

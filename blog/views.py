@@ -4,12 +4,12 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.shortcuts import render,get_object_or_404,redirect
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404 , HttpResponse
 from .models import Blog
 from comments.models import Comment
 from .forms import BlogForm
 from comments.forms import CommentForm
-from .utils import get_read_time
+
 
 # Create your views here.
 
@@ -73,9 +73,12 @@ def blog_detail (request, slug=None):
 		"object_id" : instance.id
 	}
 	
-	print (get_read_time(instance.get_markdown()))
 	form=CommentForm(request.POST or None,initial=initial_data)
 	if form.is_valid():
+		if not request.user.is_authenticated():
+			response=HttpResponse("Please Login to add a Comment or reply")
+			response.status_code = 403
+			return response
 		contentType=form.cleaned_data.get("content_type")
 		c_Type=ContentType.objects.get(model=contentType)
 		obj_id=form.cleaned_data.get("object_id")

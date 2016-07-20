@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
 from markdown_deux import markdown
+from .utils import get_read_time
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
 
@@ -21,7 +22,8 @@ class Blog(models.Model):
 	image = models.ImageField(upload_to=upload_location,null=True,blank=True,width_field="width_field",height_field="height_field")
 	width_field = models.IntegerField(default=0)
 	height_field = models.IntegerField(default=0)
-	content = models.TextField(max_length=720)
+	content = models.TextField()
+	read_time = models.TimeField(null=True,blank=True)
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	
@@ -71,6 +73,8 @@ def create_slug(instance,new_slug=None):
 def pre_save_receiver(sender,instance, *args, **kwargs):
 	if not instance.slug:
 		instance.slug=create_slug(instance)
+	if instance.content:
+		instance.read_time=get_read_time(instance.content)
 
 
 pre_save.connect(pre_save_receiver,sender=Blog)

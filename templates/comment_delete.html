@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load urlify %}
+{% load crispy_forms_tags %}
+
+{% block base_title%} {{ block.super}} | Comment | Delete {% endblock %}
+
+<style>
+{% block style %}
+
+.wmd-panel{
+	margin-right:0px !important;
+	margin-left:0px !important; 
+}
+
+.comment-reply{
+	display:none;
+}
+
+{% endblock %}
+</style>
+
+<!-- {% block head_content %} 
+
+{{ my_form.media }}
+
+{% endblock head_content %}
+ -->
+{% block content %}
+
+<div class='col-sm-6 col-sm-offset-0'>
+	
+
+		
+	<p class='lead'>Are you sure you want to delete ?</p>
+	
+	<div >
+		
+
+		<form method="POST">{% csrf_token %}
+			<!-- {{ form |crispy }} -->
+			<input type="submit" class="btn btn-warning" value = "Confirm">
+			<a href="{{ object.get_comments_absolute_url }}" class="btn btn-default">Cancel</a>
+		</form>
+	</div>
+
+	
+</div>
+
+{% endblock %}
