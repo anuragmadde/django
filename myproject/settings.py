@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'markdown_deux',
     'pagedown',
     'comments',
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -65,6 +66,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'myproject.urls'
+
+LOGIN_URL="/account/login/"
 
 TEMPLATES = [
     {

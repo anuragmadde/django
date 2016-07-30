@@ -1,5 +1,6 @@
 from urllib.parse import quote_plus
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -64,6 +65,7 @@ def blog_create (request):
 	}
 	return render(request,"blog_create.html",context)
 
+# @login_required(login_url='/accounts/login/')
 def blog_detail (request, slug=None):
 	instance = get_object_or_404(Blog,slug=slug )
 	# share_string = quote_plus(instance.content)

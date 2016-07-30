@@ -8,6 +8,8 @@ from django.db import models
 # Create your models here.
 
 class BlogManager(models.Manager):
+
+
 	def filter_by_instance(self,instance):
 		content_type= ContentType.objects.get_for_model(instance.__class__)
 		obj_id=instance.id
@@ -40,6 +42,7 @@ class Comment(models.Model):
 
  	class Meta:
  		ordering = ["-timestamp"]
+
  	objects=models.Manager()
  	custom_filter=BlogManager()
 

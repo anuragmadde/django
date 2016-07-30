@@ -3,9 +3,9 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-urlpatterns = [
+urlpatterns = [ 
     # Examples:
-     url(r'^$', 'newsletter.views.home',name='django'),
+     url(r'^$', 'login.views.login_view',name='django'),
      url(r'^newsletter/',include('newsletter.urls', namespace='newsletter')),
      url(r'^comments/',include('comments.urls', namespace='comment')),
      url(r'^account/',include('login.urls', namespace='account')),
@@ -14,6 +14,8 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^api/', include('blog.api.urls', namespace='api')),
+    url(r'^api/comments/', include('comments.api.urls', namespace='api-comment')),
 
 ]
 
