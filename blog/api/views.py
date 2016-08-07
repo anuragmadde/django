@@ -40,6 +40,7 @@ from .serializer import (
 
 class BlogListAPIView(ListAPIView):
 	serializer_class=BlogListSerializer
+	# serializer = BlogListSerializer(data=request.data,context={'request':request})
 	filter_backends=[SearchFilter]
 	search_fields = ['title']
 	pagination_class = CustomPageNumberPagination#PageNumberPagination

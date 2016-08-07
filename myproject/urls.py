@@ -14,8 +14,9 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^api/', include('blog.api.urls', namespace='api')),
+    url(r'^api/user/', include('login.api.urls', namespace='api-login')),
     url(r'^api/comments/', include('comments.api.urls', namespace='api-comment')),
+    url(r'^api/', include('blog.api.urls', namespace='api')),
 
 ]
 

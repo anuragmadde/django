@@ -10,6 +10,8 @@ from comments.api.serializers import CommentListSerializer
 from comments.models import Comment
 
 
+
+
 class BlogCreateUpdateSerializer(ModelSerializer):
 	class Meta:
 		model=Blog

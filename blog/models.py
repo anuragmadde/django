@@ -35,6 +35,9 @@ class Blog(models.Model):
 	def get_absolute_url(self):
 		return reverse("blog:detail", kwargs={"slug": self.slug})
 
+	def get_api_url(self):
+		return reverse("api:detail", kwargs={"slug": self.slug})
+
 	def get_markdown(self):
 		content = self.content
 		mark_text = markdown(content)

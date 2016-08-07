@@ -19,6 +19,8 @@ def blog_home (request):
 	# instance = Blog.objects.get(id=1)
 	# instance = get_object_or_404(Blog,id=1)
 	query=request.GET.get('query')
+	print (request.META.get('HTTP_X_FORWARDED_FOR'))
+	print (request.META.get('REMOTE_ADDR'))
 	if query:
 		querySet_List = Blog.objects.filter(
 			Q(title__icontains=query) |
