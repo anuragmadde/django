@@ -1,0 +1,82 @@
+{% load staticfiles %}
+<html>
+
+		<head>
+			<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<!-- The above 3 meta tags *must* come first in the head; any other head
+			     content must come *after* these tags -->
+
+			<!-- Bootstrap -->
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+			<script src="http://code.highcharts.com/highcharts.js"></script>
+			<script type="text/javascript" src="/js/themes/gray.js"></script>
+
+		</head>
+
+		<body>
+		<div class="container">
+		<div class="col-sm-6">
+			<div id="container" style="width:100%; height:400px;"></div>
+			
+		</div>
+		</div>
+			<script>
+
+				$(document).ready(function(){
+				    var myChart = Highcharts.chart('container', {
+				        
+				        title: {
+				            text: 'Data Consumption'
+				        },
+				        xAxis: {
+				            categories: ['Jan', 'Feb', 'Mar','April','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+				            showEmpty: false
+				        },
+				        yAxis: {
+				            
+				            showEmpty: false
+				        },
+				        series: [{
+				            type: 'column',
+				            allowPointSelect : true,
+				            data: [
+				            	['Jan',15.0],
+				            	['Feb',0.0],
+				            	['Mar',21.0],
+				            	['Apr',5.0],
+				            	['May',15.0],
+				            	['Jun',9.0],
+				            	['Jul',1.0],
+				            	['Aug',0.0],
+				            	['Sep',-5.0],
+				            	['Oct',10.0],
+				            	['Nov',8.0],
+				            	{name : 'Dec', y:17.0,color:"#00FFDD"},
+				            	
+				            ],
+				            showInLegend: true
+
+
+
+				        }]
+				    });
+				});
+			</script>
+			
+			
+
+		</body>
+
+		
+
+			
+
+</html>

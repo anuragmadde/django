@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
-{% block base_title%} {{ block.super}} | About {% endblock %}
+
+{% block base_title%} {{ block.super}} | Abouts {% endblock %}
 
 {% block content %}
-	<p class='lead' >Page Under Construction<p>
-
+	{% include "highcharts.html" %}
 {% endblock %}

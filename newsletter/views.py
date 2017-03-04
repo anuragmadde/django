@@ -11,6 +11,7 @@ from .models import SignUp
 
 # Create your views here.
 def contact(request):
+
 	title= "Hey Dude !!"
 
 	form = ContactForm()
@@ -82,3 +83,12 @@ def home(request):
 
 def about(request):
 	return render(request,"about.html",{})
+
+def index(request):
+	return render(request,"index.html",{})
+
+def aboutus(request):
+	return render(request,"aboutus.html",{})
+
+def contactus(request):
+	return render(request,"contactus.html",{})
