@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'pagedown',
     'comments',
     'rest_framework',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (

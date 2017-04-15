@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^api/comments/', include('comments.api.urls', namespace='api-comment')),
     url(r'^api/', include('blog.api.urls', namespace='api')),
 
+    url(r'^captcha/', include('captcha.urls')),
+
 ]
 
 if settings.DEBUG:
