@@ -14,6 +14,8 @@
  -->
 {% block content %}
 
+{% if not request.user.is_authenticated %}
+
 <div class='col-sm-6 col-sm-offset-0'>
 	
 
@@ -29,5 +31,9 @@
 
 	
 </div>
+{% else %}
+ 	Login Successfull.
+
+ {% endif %}
 
 {% endblock %}

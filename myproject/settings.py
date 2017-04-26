@@ -69,6 +69,7 @@ ROOT_URLCONF = 'myproject.urls'
 
 LOGIN_URL="/account/login/"
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

@@ -5,5 +5,6 @@
 {% block base_title%} {{ block.super}} | Abouts {% endblock %}
 
 {% block content %}
+	<h2>Visits : {{ visits }} </h2>
 	{% include "highcharts.html" %}
 {% endblock %}

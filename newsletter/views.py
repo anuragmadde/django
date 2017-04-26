@@ -42,13 +42,18 @@ def contact(request):
 
 
 def home(request):
+
 	title= "Whats Up MaDDe !!"
+
+	num_visits=request.session.get('num_visits',0)
+	request.session['num_visits'] = num_visits + 1
 
 	form = SignUpForm(request.POST or None)	
 
 	context = {
 		"title" : title,
 		"form"	: form,
+		"visits" : num_visits,
 	}
 	
 	if form.is_valid():
@@ -82,7 +87,10 @@ def home(request):
 
 
 def about(request):
-	return render(request,"about.html",{})
+	num_visits=request.session.get('num_visits',0)
+	request.session['num_visits'] = num_visits + 1
+
+	return render(request,"about.html",{"visits": num_visits})
 
 def index(request):
 	return render(request,"index.html",{})
